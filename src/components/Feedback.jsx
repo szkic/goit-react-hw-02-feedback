@@ -9,19 +9,15 @@ export class Feedback extends Component {
     bad: 0,
   };
 
-  // static defaultProps = {
-  //   step: 1,
-  // };
-
   countFeedback = e => {
     console.log('button clicked', e.target);
 
     const {
-      target: { name, value },
+      target: { name },
     } = e;
 
     return this.setState(() => {
-      return { [`${name}`]: +value + 1 };
+      return { [name]: this.state[name] + 1 };
     });
   };
 
@@ -49,36 +45,14 @@ export class Feedback extends Component {
   }
 
   render() {
+    const btnNames = Object.keys(this.state);
+
     return (
       <>
-        <div>
-          <h2>Please leaeve Feedback</h2>
-          <button
-            type="button"
-            onClick={this.countFeedback}
-            name="good"
-            value={this.state.good}
-          >
-            Good
-          </button>
-          <button
-            type="button"
-            onClick={this.countFeedback}
-            name="neutral"
-            value={this.state.neutral}
-          >
-            Neutral
-          </button>
-          <button
-            type="button"
-            onClick={this.countFeedback}
-            name="bad"
-            value={this.state.bad}
-          >
-            Bad
-          </button>
-        </div>
-        {/* <FeedbackOptions options={} onLeaveFeedback={} /> */}
+        <FeedbackOptions
+          options={btnNames}
+          onLeaveFeedback={this.countFeedback}
+        />
         <Statistics
           good={this.state.good}
           neutral={this.state.neutral}
