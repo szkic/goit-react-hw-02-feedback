@@ -1,5 +1,9 @@
-import { Feedback } from './Feedback/Feedback';
+import { Feedback } from './Feedback';
 
 export const App = () => {
-  return <Feedback />;
+  return (
+    <>
+      <Feedback />
+    </>
+  );
 };
