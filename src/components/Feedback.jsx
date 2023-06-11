@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Statistics } from 'components/Statistics';
 import { FeedbackOptions } from './FeedbackOptions';
+import { Section } from './Section';
 
 export class Feedback extends Component {
   state = {
@@ -16,8 +17,8 @@ export class Feedback extends Component {
       target: { name },
     } = e;
 
-    return this.setState(() => {
-      return { [name]: this.state[name] + 1 };
+    return this.setState(prevState => {
+      return { [name]: prevState[name] + 1 };
     });
   };
 
@@ -49,17 +50,22 @@ export class Feedback extends Component {
 
     return (
       <>
-        <FeedbackOptions
-          options={btnNames}
-          onLeaveFeedback={this.countFeedback}
-        />
-        <Statistics
-          good={this.state.good}
-          neutral={this.state.neutral}
-          bad={this.state.bad}
-          total={this.countTotalFeedback()}
-          positivePercentage={this.countPositiveFeedbackPercentage()}
-        />
+        <Section title={'Please leave Feedback'}>
+          <FeedbackOptions
+            options={btnNames}
+            onLeaveFeedback={this.countFeedback}
+          />
+        </Section>
+
+        <Section title={'Statistics'}>
+          <Statistics
+            good={this.state.good}
+            neutral={this.state.neutral}
+            bad={this.state.bad}
+            total={this.countTotalFeedback()}
+            positivePercentage={this.countPositiveFeedbackPercentage()}
+          />
+        </Section>
       </>
     );
   }
