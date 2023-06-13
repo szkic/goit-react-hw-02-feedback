@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { Statistics } from 'components/Statistics';
-import { FeedbackOptions } from './FeedbackOptions';
-import { Section } from './Section';
+import { Statistics } from 'components/Statistics/Statistics';
+import { FeedbackOptions } from './FeedbackOptions/FeedbackOptions';
+import { Section } from './Section/Section';
 
 export class App extends Component {
   state = {
@@ -11,8 +11,6 @@ export class App extends Component {
   };
 
   countFeedback = e => {
-    console.log('button clicked', e.target);
-
     const {
       target: { name },
     } = e;
