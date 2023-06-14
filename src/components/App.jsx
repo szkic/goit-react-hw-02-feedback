@@ -32,19 +32,15 @@ export class App extends Component {
   }
 
   countPositiveFeedbackPercentage() {
-    const positiveFeedback = this.state.good;
+    const { good } = this.state;
+    const total = this.countTotalFeedback();
 
-    if (this.countTotalFeedback() === 0) {
-      return '0%';
-    } else {
-      return `${Math.round(
-        (positiveFeedback / this.countTotalFeedback()) * 100
-      )}%`;
-    }
+    return Math.round((good / total) * 100) || 0;
   }
 
   render() {
     const btnNames = Object.keys(this.state);
+    const { good, neutral, bad } = this.state;
 
     return (
       <>
@@ -57,9 +53,9 @@ export class App extends Component {
 
         <Section title={'Statistics'}>
           <Statistics
-            good={this.state.good}
-            neutral={this.state.neutral}
-            bad={this.state.bad}
+            good={good}
+            neutral={neutral}
+            bad={bad}
             total={this.countTotalFeedback()}
             positivePercentage={this.countPositiveFeedbackPercentage()}
           />
